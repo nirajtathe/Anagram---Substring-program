@@ -1,4 +1,4 @@
-# Anagram---Substring-program
+# Anagram-Substring program
 
 This program is the solution for below problem.
 
