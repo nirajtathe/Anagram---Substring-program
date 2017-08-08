@@ -1,5 +1,6 @@
 public class AnagramAllAscii {
 	
+	/*
 	private static boolean checkEqual(int[] textArr, int[] patternArr){
 		for(int i = 0; i < textArr.length; i++){
 			if(textArr[i] != patternArr[i]){
@@ -53,8 +54,56 @@ public class AnagramAllAscii {
 		
 		return result;
 	}
+	*/
 	
+	public static boolean searchAnagramSubstring(String text, String pattern){
+		boolean result = false;
+		int textLen = text.length();
+		int patternLen = pattern.length();
+		
+		if(textLen < patternLen | patternLen == 0 | textLen == 0){
+			return result;
+		}
+			
+		int textCharSum=0;
+		int textLastCharValue=0;
+		
+		int patternCharSum = 0;
 	
+		//initialize the pattern char sum and text char sum 
+		int i = 0;
+		for(i = 0; i < patternLen; i++){
+			patternCharSum+=(int)pattern.charAt(i);
+			textCharSum+=(int)text.charAt(i);
+		}
+		
+		textLastCharValue=(int)text.charAt(i-patternLen);
+		
+		//search the pattern in a sliding window of text 
+		while(i < textLen){
+			
+			if(patternCharSum==textCharSum){
+				result=true;
+				break;
+			}
+			
+			//slide the text window by 1 position to the right and check for anagram
+			textCharSum-=textLastCharValue;
+			textCharSum+=(int)text.charAt(i);
+			
+			i++;
+			//updating last char value
+			textLastCharValue=(int)text.charAt(i-patternLen);
+		
+		} 
+		
+		// Check for the last window in text
+		if(!result && patternCharSum==textCharSum){
+			result=true;
+		}
+		
+		return result;
+	}
 
 	public static void main(String[] args) {
 		
